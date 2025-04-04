@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petra Anima - Utensilios de Cocina Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f3ef;
+        }
+
+        .header {
+            background-color: #2a2a2a;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .logo {
+            color: #e8d5b5;
+            font-size: 2.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        nav {
+            background-color: #3e3e3e;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: #e8d5b5;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1556911220-bff31c812dba') center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .products {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+
+            .product-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            background: #f5f3ef;
+            padding: 10px;
+        }
+
+        .footer {
+            background-color: #2a2a2a;
+            color: #e8d5b5;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #9c7c5e;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #9c7c5e;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">Petra Anima</h1>
+    </header>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#sobre-nosotros">Sobre Nosotros</a>
+        <a href="#contacto">Contacto</a>
+        <a href="carrito.html">🛒 Carrito</a>
+    </nav>
+
+    <div class="cart-notification" id="cartNotification">¡Producto añadido!</div>
+
+    <section class="hero">
+        <div>
+            <h2>Arte Funcional para tu Cocina</h2>
+            <p>Utensilios tallados en piedra natural y acero inoxidable</p>
+            <button class="btn" onclick="openModal()">Descubre nuestra colección</button>
+        </div>
+    </section>
+
+    <!-- Modal de la Colección -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="modal" id="collectionModal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2>🧑🍳 Colección Artesanal 🌱</h2>
+        <p>Descubre nuestra exclusiva línea de <strong>platos de piedra volcánica tallada</strong>, donde cada pieza es única gracias a:</p>
+        <ul>
+            <li>✔️ Extracción sostenible de roca volcánica</li>
+            <li>✔️ Tallado manual por artesanos locales</li>
+            <li>✔️ Acabado natural sin químicos</li>
+        </ul>
+        <p>Y nuestros <strong>utensilios eco-friendly</strong>:</p>
+        <ul>
+            <li>♻️ Acero inoxidable 100% reciclable</li>
+            <li>♻️ Mangos de bambú de rápido crecimiento</li>
+            <li>♻️ Empaques biodegradables</li>
+        </ul>
+        <button class="btn" onclick="closeModal()">Cerrar</button>
+    </div>
+
+    <section class="products" id="productos">
+        <div class="product-card">
+            <img src="plato de piedra.webp" alt="Platos de piedra">
+            <h3>Platos Volcánicos</h3>
+            <p>Piedra volcánica tallada a mano</p>
+            <p class="price">$89.99</p>
+            <button class="btn" onclick="addToCart('Platos Volcánicos', 89.99, this)">Añadir al Carrito</button>
+        </div>
+
+        <div class="product-card">
+            <img src="Cubiertos.jpg" alt="Cubiertos">
+            <h3>Cubiertos Eco</h3>
+            <p>Acero inoxidable y bambú</p>
+            <p class="price">$149.99</p>
+            <button class="btn" onclick="addToCart('Cubiertos Eco', 149.99, this)">Añadir al Carrito</button>
+        </div>
+
+        <div class="product-card">
+            <img src="tabla.webp" alt="Tablas de cortar">
+            <h3>Tablas Sustentables</h3>
+            <p>Madera de reforestación</p>
+            <p class="price">$69.99</p>
+            <button class="btn" onclick="addToCart('Tablas Sustentables', 69.99, this)">Añadir al Carrito</button>
+        </div>
+    </section>
+
+    <section class="about" id="sobre-nosotros">
+        <h2>Arte en Cada Detalle</h2>
+        <p>Cada pieza es tallada a mano por artesanos expertos, utilizando materiales 100% naturales.</p>
+    </section>
+
+    <footer class="footer">
+        <div>
+            <h4>Síguenos</h4>
+            <p>Instagram | Pinterest | TikTok</p>
+            <p>© 2024 Petra Anima - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funciones del Modal
+        function openModal() {
+            document.getElementById('collectionModal').style.display = 'block';
+            document.getElementById('modalOverlay').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('collectionModal').style.display = 'none';
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+
+        // Funcionalidad del Carrito
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        function addToCart(productName, price, button) {
+            const product = {
+                name: productName,
+                price: price,
+                image: button.parentElement.querySelector('img').src
+            };
+            
+            cartItems.push(product);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            
+            const notification = document.getElementById('cartNotification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'carrito.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
